@@ -2,7 +2,7 @@ package com.ads_online.diploma.dto;
 
 public class CreateOrUpdateAdDto {
     private String title;
-    private Integer price;
+    private int price;
     private String description;
 
     public String getTitle() {
@@ -13,11 +13,11 @@ public class CreateOrUpdateAdDto {
         this.title = title;
     }
 
-    public Integer getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

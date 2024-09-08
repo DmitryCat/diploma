@@ -8,6 +8,7 @@ public class RegisterDto {
     private String phone;
     private String role;
 
+    // Getters and Setters
     public String getUsername() {
         return username;
     }

@@ -3,7 +3,6 @@ package com.ads_online.diploma.dto;
 public class NewPasswordDto {
     private String currentPassword;
     private String newPassword;
-
     public String getCurrentPassword() {
         return currentPassword;
     }

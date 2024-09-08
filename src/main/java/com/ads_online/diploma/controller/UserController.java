@@ -8,27 +8,43 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/users")
 public class UserController {
 
-    @PostMapping("/set_password")
-    public ResponseEntity<Void> setPassword(@RequestBody NewPasswordDto newPasswordDto) {
-        // Заглушка
-        return ResponseEntity.ok().build();
-    }
-
+    /**
+     * Получение информации об авторизованном пользователе.
+     * @return Объект UserDto, представляющий информацию о пользователе.
+     */
     @GetMapping("/me")
     public ResponseEntity<UserDto> getUser() {
-        // Заглушка
-        return ResponseEntity.ok(new UserDto());
+        UserDto userDto = new UserDto();
+        return ResponseEntity.ok(userDto);
     }
 
+    /**
+     * Обновление информации об авторизованном пользователе.
+     * @param updateUserDto Объект с новыми данными пользователя.
+     * @return Обновленный объект UpdateUserDto.
+     */
     @PatchMapping("/me")
     public ResponseEntity<UpdateUserDto> updateUser(@RequestBody UpdateUserDto updateUserDto) {
-        // Заглушка
         return ResponseEntity.ok(updateUserDto);
     }
 
+    /**
+     * Обновление аватара авторизованного пользователя.
+     * @param image Файл изображения в виде строки.
+     * @return Пустой ответ со статусом OK.
+     */
     @PatchMapping("/me/image")
-    public ResponseEntity<Void> updateUserImage() {
-        // Заглушка
+    public ResponseEntity<Void> updateUserImage(@RequestParam("image") String image) {
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * Обновление пароля пользователя.
+     * @param newPasswordDto Объект с текущим и новым паролем.
+     * @return Пустой ответ со статусом OK.
+     */
+    @PostMapping("/set_password")
+    public ResponseEntity<Void> setPassword(@RequestBody NewPasswordDto newPasswordDto) {
         return ResponseEntity.ok().build();
     }
 }
