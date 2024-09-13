@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @CrossOrigin(value = "http://localhost:3000")
 public class AuthController {
-
     private final AuthService authService;
 
     @Operation(summary = "Авторизация пользователя")

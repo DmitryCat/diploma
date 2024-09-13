@@ -22,7 +22,6 @@ public class CommentController {
 
     private final CommentService commentService;
 
-
     @Operation(summary = "Получение комментариев к объявлению")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Комментарии успешно получены")

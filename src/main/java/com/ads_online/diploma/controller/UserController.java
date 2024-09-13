@@ -19,7 +19,6 @@ public class UserController {
 
     private final UserService userService;
 
-
     @Operation(summary = "Получение информации о пользователе")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Информация успешно получена"),

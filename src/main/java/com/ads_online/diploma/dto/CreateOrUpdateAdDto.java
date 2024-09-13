@@ -12,6 +12,7 @@ public class CreateOrUpdateAdDto {
     private Integer price;
     private String description;
 
+
     public String getTitle() {
         return title;
     }

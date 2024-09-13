@@ -21,6 +21,7 @@ import com.ads_online.diploma.dto.AdDto;
 @CrossOrigin(value = "http://localhost:3000")
 public class AdsController {
 
+
     private final AdsService adsService;
 
 
