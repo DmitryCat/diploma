@@ -1,34 +1,26 @@
 package com.ads_online.diploma.dto;
 
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class AdDto {
-    private Integer pk;
-    private String title;
-    private Integer price;
-    private String image;
     private Integer author;
+    private String image;
+    private Integer pk;
+    private Integer price;
+    private String title;
 
-    public Integer getPk() {
-        return pk;
+    public Integer getAuthor() {
+        return author;
     }
 
-    public void setPk(Integer pk) {
-        this.pk = pk;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
+    public void setAuthor(Integer author) {
+        this.author = author;
     }
 
     public String getImage() {
@@ -39,11 +31,27 @@ public class AdDto {
         this.image = image;
     }
 
-    public Integer getAuthor() {
-        return author;
+    public Integer getPk() {
+        return pk;
     }
 
-    public void setAuthor(Integer author) {
-        this.author = author;
+    public void setPk(Integer pk) {
+        this.pk = pk;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

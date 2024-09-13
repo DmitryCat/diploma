@@ -1,8 +1,15 @@
 package com.ads_online.diploma.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CreateOrUpdateAdDto {
     private String title;
-    private int price;
+    private Integer price;
     private String description;
 
     public String getTitle() {
@@ -13,11 +20,11 @@ public class CreateOrUpdateAdDto {
         this.title = title;
     }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 

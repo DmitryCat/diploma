@@ -1,28 +1,19 @@
 package com.ads_online.diploma.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CommentDto {
-    private Integer pk;
-    private String text;
     private Integer author;
     private String authorImage;
     private String authorFirstName;
     private Long createdAt;
-
-    public Integer getPk() {
-        return pk;
-    }
-
-    public void setPk(Integer pk) {
-        this.pk = pk;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
+    private Integer pk;
+    private String text;
 
     public Integer getAuthor() {
         return author;
@@ -54,5 +45,21 @@ public class CommentDto {
 
     public void setCreatedAt(Long createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Integer getPk() {
+        return pk;
+    }
+
+    public void setPk(Integer pk) {
+        this.pk = pk;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }

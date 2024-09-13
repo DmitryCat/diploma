@@ -1,24 +1,40 @@
 package com.ads_online.diploma.dto;
 
-import java.util.List;
-
 public class AdsDto {
-    private Integer count;
-    private List<AdDto> results;
+    private Integer id;
+    private String title;
+    private String description;
+    private Double price;
 
-    public Integer getCount() {
-        return count;
+    public Integer getId() {
+        return id;
     }
 
-    public void setCount(Integer count) {
-        this.count = count;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public List<AdDto> getResults() {
-        return results;
+    public String getTitle() {
+        return title;
     }
 
-    public void setResults(List<AdDto> results) {
-        this.results = results;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

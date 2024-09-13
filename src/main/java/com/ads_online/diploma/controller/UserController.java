@@ -1,50 +1,44 @@
 package com.ads_online.diploma.controller;
 
-import com.ads_online.diploma.dto.*;
+import com.ads_online.diploma.dto.UserDto;
+import com.ads_online.diploma.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
+@Tag(name = "Users", description = "Управление пользователями")
+@RequiredArgsConstructor
+@CrossOrigin(value = "http://localhost:3000")
 public class UserController {
 
-    /**
-     * Получение информации об авторизованном пользователе.
-     * @return Объект UserDto, представляющий информацию о пользователе.
-     */
-    @GetMapping("/me")
-    public ResponseEntity<UserDto> getUser() {
-        UserDto userDto = new UserDto();
-        return ResponseEntity.ok(userDto);
+    private final UserService userService;
+
+
+    @Operation(summary = "Получение информации о пользователе")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Информация успешно получена"),
+            @ApiResponse(responseCode = "404", description = "Пользователь не найден")
+    })
+    @GetMapping("/{userId}")
+    public ResponseEntity<UserDto> getUser(@PathVariable int userId) {
+        UserDto user = userService.getUserById(userId);
+        return ResponseEntity.ok(user);
     }
 
-    /**
-     * Обновление информации об авторизованном пользователе.
-     * @param updateUserDto Объект с новыми данными пользователя.
-     * @return Обновленный объект UpdateUserDto.
-     */
-    @PatchMapping("/me")
-    public ResponseEntity<UpdateUserDto> updateUser(@RequestBody UpdateUserDto updateUserDto) {
-        return ResponseEntity.ok(updateUserDto);
-    }
-
-    /**
-     * Обновление аватара авторизованного пользователя.
-     * @param image Файл изображения в виде строки.
-     * @return Пустой ответ со статусом OK.
-     */
-    @PatchMapping("/me/image")
-    public ResponseEntity<Void> updateUserImage(@RequestParam("image") String image) {
-        return ResponseEntity.ok().build();
-    }
-
-    /**
-     * Обновление пароля пользователя.
-     * @param newPasswordDto Объект с текущим и новым паролем.
-     * @return Пустой ответ со статусом OK.
-     */
-    @PostMapping("/set_password")
-    public ResponseEntity<Void> setPassword(@RequestBody NewPasswordDto newPasswordDto) {
-        return ResponseEntity.ok().build();
+    @Operation(summary = "Обновление данных пользователя")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Данные успешно обновлены"),
+            @ApiResponse(responseCode = "400", description = "Некорректные данные")
+    })
+    @PutMapping("/{userId}")
+    public ResponseEntity<UserDto> updateUser(@PathVariable int userId, @RequestBody UserDto UserDto) {
+        UserDto updatedUser = userService.updateUser(userId, UserDto);
+        return ResponseEntity.ok(updatedUser);
     }
 }
