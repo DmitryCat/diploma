@@ -1,11 +1,8 @@
 package com.ads_online.diploma.service;
 
-import com.ads_online.diploma.dto.AuthResponseDto;
-import com.ads_online.diploma.dto.LoginDto;
-import com.ads_online.diploma.dto.RegisterDto;
-import com.ads_online.diploma.dto.UserDto;
+import com.ads_online.diploma.dto.RegisterDTO;
 
 public interface AuthService {
-    AuthResponseDto login(LoginDto loginDto);
-    UserDto register(RegisterDto registerDTO);
+    boolean login(String userName, String password);
+    boolean register(RegisterDTO registerDTO);
 }
