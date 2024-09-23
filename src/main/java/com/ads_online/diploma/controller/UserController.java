@@ -1,34 +1,94 @@
 package com.ads_online.diploma.controller;
 
-import com.ads_online.diploma.dto.*;
+import com.ads_online.diploma.dto.NewPasswordDTO;
+import com.ads_online.diploma.dto.UpdateUserDTO;
+import com.ads_online.diploma.dto.UserDTO;
+import com.ads_online.diploma.entity.User;
+import com.ads_online.diploma.repository.UserRepository;
+import com.ads_online.diploma.service.UserService;
+import com.ads_online.diploma.utils.MethodLog;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+
+import java.io.IOException;
+
+@Slf4j
 @RestController
+@RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
+@Tag(name = "API для работы с пользователями")
 @RequestMapping("/users")
 public class UserController {
 
+    private final UserRepository repository;
+    private final UserService service;
+    private final PasswordEncoder encoder;
+
     @PostMapping("/set_password")
-    public ResponseEntity<Void> setPassword(@RequestBody NewPasswordDto newPasswordDto) {
-        // Заглушка
+    @Operation(summary = "Обновление пароля", responses = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")
+    })
+    public ResponseEntity<Void> setPassword(@RequestBody NewPasswordDTO newPasswordDTO, Authentication authentication) {
+        log.warn("POST запрос на смену пароля, тело запроса: {}, метод контроллера: {}", newPasswordDTO, MethodLog.getMethodName());
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = repository.findByEmail(auth.getName());
+        if (!encoder.matches(newPasswordDTO.getCurrentPassword(), user.getPassword())) {
+            log.error("Неверный пароль");
+            return ResponseEntity.status(403).build();
+        }
+        service.updatePassword(newPasswordDTO, authentication);
+        log.info("Пароль обновлен");
+
         return ResponseEntity.ok().build();
     }
-
     @GetMapping("/me")
-    public ResponseEntity<UserDto> getUser() {
-        // Заглушка
-        return ResponseEntity.ok(new UserDto());
+    @Operation(summary = "Получение информации об авторизованном пользователе", responses = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized"),
+    })
+    public ResponseEntity<UserDTO> getUser(Authentication authentication) {
+        log.warn("GET запрос на получение активного пользователя, метод контроллера: {}", MethodLog.getMethodName());
+
+        return ResponseEntity.ok(service.getCurrentUser(authentication));
     }
 
     @PatchMapping("/me")
-    public ResponseEntity<UpdateUserDto> updateUser(@RequestBody UpdateUserDto updateUserDto) {
-        // Заглушка
-        return ResponseEntity.ok(updateUserDto);
+    @Operation(summary = "Обновление информации об авторизованном пользователе", responses = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized"),
+    })
+    public ResponseEntity<UserDTO> updateUser(@RequestBody UpdateUserDTO updateUserDTO, Authentication authentication) {
+        log.warn("PATCH запрос на обновление пользователя, тело запроса: {}, метод контроллера: {}", updateUserDTO, MethodLog.getMethodName());
+
+        return ResponseEntity.ok(service.updateUser(updateUserDTO, authentication));
     }
 
-    @PatchMapping("/me/image")
-    public ResponseEntity<Void> updateUserImage() {
-        // Заглушка
+    @PatchMapping(value = "/me/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Operation(summary = "Обновление аватара авторизованного пользователя", responses = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized"),
+    })
+    public ResponseEntity<?> updateUserImage(@RequestPart(value = "image") MultipartFile multipartFile, Authentication authentication) throws IOException {
+        log.warn("PATCH запрос на обновление аватара пользователя, тело запроса: MultipartFile image, метод контроллера: {}", MethodLog.getMethodName());
+
+        service.updateUserImage(multipartFile, SecurityContextHolder.getContext().getAuthentication().getName(), authentication);
+
+        log.info("Аватар пользователя обновлен");
+
         return ResponseEntity.ok().build();
     }
 }
