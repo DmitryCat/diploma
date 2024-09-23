@@ -55,7 +55,6 @@ public class UserController {
 
         return ResponseEntity.ok().build();
     }
-
     @GetMapping("/me")
     @Operation(summary = "Получение информации об авторизованном пользователе", responses = {
             @ApiResponse(responseCode = "200", description = "OK"),

@@ -35,7 +35,6 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @RequestMapping("/ads")
 public class AdsController {
-
     private final AdService adService;
 
     @Operation(

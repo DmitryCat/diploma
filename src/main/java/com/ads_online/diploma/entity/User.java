@@ -15,7 +15,6 @@ import java.util.List;
 @ToString(exclude = {"ads", "comments"})
 @Table(name = "users")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

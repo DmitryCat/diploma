@@ -18,7 +18,6 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pk;
-
     private LocalDateTime createdAt;
     private String text;
 

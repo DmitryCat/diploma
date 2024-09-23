@@ -24,6 +24,7 @@ public interface AdMapper {
     @Mapping(target = "image", ignore = true)
     Ad createOrUpdateAdDTOToAd(CreateOrUpdateAdDTO createOrUpdateAdDTO);
 
+
     @Mapping(target = "pk", source = "ad.pk")
     @Mapping(target = "email", source = "ad.user.email")
     @Mapping(target = "phone", source = "ad.user.phone")

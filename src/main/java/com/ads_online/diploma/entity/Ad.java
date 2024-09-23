@@ -22,7 +22,6 @@ public class Ad {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Image image;
-
     private Integer price;
     private String title;
     private String description;

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
-
 @Slf4j
 @CrossOrigin(value = "http://localhost:3000")
 @RestController

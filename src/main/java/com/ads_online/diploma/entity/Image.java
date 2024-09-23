@@ -6,7 +6,6 @@ import org.hibernate.type.ImageType;
 
 import javax.persistence.*;
 
-
 @Entity
 @Data
 @NoArgsConstructor

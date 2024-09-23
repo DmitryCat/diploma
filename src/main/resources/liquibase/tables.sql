@@ -1,5 +1,6 @@
 -- formated sql
 
+
 -- changeset DimaCat:1
 CREATE TABLE "images"
 (

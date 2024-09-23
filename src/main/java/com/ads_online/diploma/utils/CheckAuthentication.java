@@ -13,4 +13,5 @@ public class CheckAuthentication {
             throw new UnauthorizedException("Пользователь не авторизован");
         }
     }
+
 }

@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.security.core.Authentication;
 
-
 @Slf4j
 @RestController
 @Tag(name = "Комментарии")

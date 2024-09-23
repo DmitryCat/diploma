@@ -7,7 +7,6 @@ import lombok.Data;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-
 @Data
 public class UpdateUserDTO {
     @Schema(description = "Имя")

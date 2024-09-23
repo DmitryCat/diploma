@@ -22,7 +22,6 @@ public class Author {
     @Id
     private String username;
 
-
     private String authority;
 
     public String getUsername() {
